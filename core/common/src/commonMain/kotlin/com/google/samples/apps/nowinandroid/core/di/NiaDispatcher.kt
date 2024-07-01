@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.data.di
+package com.google.samples.apps.nowinandroid.core.di
 
-import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
-import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
-import me.tatarka.inject.annotations.Provides
+import me.tatarka.inject.annotations.Qualifier
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
-abstract class PlatformDependentDataModule {
-    @Provides
-    abstract fun bindsNetworkMonitor(): NetworkMonitor
+@Qualifier
+@Retention(RUNTIME)
+@Target(
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.TYPE,
+    AnnotationTarget.PROPERTY,
+)
+annotation class Dispatcher(val dispatcher: NiaDispatchers)
 
-    @Provides
-    abstract fun bindsTimeZoneMonitor(): TimeZoneMonitor
+enum class NiaDispatchers {
+    IO,
+    DEFAULT,
+    MAIN,
 }

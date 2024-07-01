@@ -20,22 +20,26 @@ import com.google.samples.apps.nowinandroid.core.di.NiaDispatchers.DEFAULT
 import com.google.samples.apps.nowinandroid.core.di.NiaDispatchers.IO
 import com.google.samples.apps.nowinandroid.core.di.NiaDispatchers.MAIN
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
 
-abstract class DispatchersComponent {
+@Component
+abstract class NativeDispatchersComponent : DispatchersComponent() {
     @Provides
-    abstract fun providesIODispatcher():
+    override fun providesIODispatcher():
         @Dispatcher(IO)
-        CoroutineDispatcher
+        CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    abstract fun providesDefaultDispatcher():
+    override fun providesDefaultDispatcher():
         @Dispatcher(DEFAULT)
-        CoroutineDispatcher
+        CoroutineDispatcher =
+        Dispatchers.Default
 
     @Provides
-    abstract fun providesMainDispatcher():
+    override fun providesMainDispatcher():
         @Dispatcher(MAIN)
-        CoroutineDispatcher
+        CoroutineDispatcher = Dispatchers.Main
 }

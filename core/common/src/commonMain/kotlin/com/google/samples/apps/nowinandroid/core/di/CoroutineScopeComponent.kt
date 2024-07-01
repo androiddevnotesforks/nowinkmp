@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.nowinandroid.core.di
 
+import com.google.samples.apps.nowinandroid.core.di.NiaDispatchers.DEFAULT
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import me.tatarka.inject.annotations.Component
@@ -29,9 +31,13 @@ import me.tatarka.inject.annotations.Scope
 annotation class ApplicationScope
 
 @Component
-abstract class CoroutineScopeComponent {
+abstract class CoroutineScopeComponent(
+    @Component val dispatchersComponent: DispatchersComponent,
+) {
+    @Dispatcher(DEFAULT)
+    abstract val dispatcher: CoroutineDispatcher
+
     @Provides
-    fun providesCoroutineScope(
-        dispatcher: DefaultDispatcher,
-    ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
+    fun providesCoroutineScope(): CoroutineScope =
+        CoroutineScope(SupervisorJob() + dispatcher)
 }
