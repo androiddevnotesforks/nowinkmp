@@ -37,9 +37,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import me.tatarka.inject.annotations.Inject
 
-class TopicViewModel @Inject constructor(
+class TopicViewModel(
     savedStateHandle: SavedStateHandle,
     private val userDataRepository: UserDataRepository,
     topicsRepository: TopicsRepository,

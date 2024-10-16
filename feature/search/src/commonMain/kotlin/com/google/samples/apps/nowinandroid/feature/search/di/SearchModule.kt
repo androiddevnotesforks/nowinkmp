@@ -14,16 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.domain.di
+package com.google.samples.apps.nowinandroid.feature.search.di
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.ksp.generated.module
+import com.google.samples.apps.nowinandroid.feature.search.SearchViewModel
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 
-val domainModule = listOf(
-    DomainModule().module,
-)
-
-@Module
-@ComponentScan
-class DomainModule
+val searchModule = module {
+    viewModel {
+        SearchViewModel(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+        )
+    }
+}

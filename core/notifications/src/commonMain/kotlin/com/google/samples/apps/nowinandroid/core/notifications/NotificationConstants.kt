@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.domain.di
+package com.google.samples.apps.nowinandroid.core.notifications
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.ksp.generated.module
-
-val domainModule = listOf(
-    DomainModule().module,
-)
-
-@Module
-@ComponentScan
-class DomainModule
+private const val DEEP_LINK_SCHEME_AND_HOST = "https://www.nowinandroid.apps.samples.google.com"
+private const val DEEP_LINK_FOR_YOU_PATH = "foryou"
+const val DEEP_LINK_BASE_PATH = "$DEEP_LINK_SCHEME_AND_HOST/$DEEP_LINK_FOR_YOU_PATH"
+const val DEEP_LINK_NEWS_RESOURCE_ID_KEY = "linkedNewsResourceId"
+const val DEEP_LINK_URI_PATTERN = "$DEEP_LINK_BASE_PATH/{$DEEP_LINK_NEWS_RESOURCE_ID_KEY}"
